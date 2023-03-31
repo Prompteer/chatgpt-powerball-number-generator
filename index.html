@@ -29,9 +29,18 @@ button {
     font-size: 30px; /* Increase the font size for mobile devices */
     padding: 20px 40px; /* Increase the padding for mobile devices */
   }
-          .ball {
+}
+        #result {
+  flex-wrap: wrap;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+        @media screen and (max-width: 480px) {
+  .ball {
     width: 60px;
     height: 60px;
+    margin-right: 5px;
   }
   .ball span {
     font-size: 24px;
@@ -107,8 +116,8 @@ button:hover {
       </style>
   </head>
   <body>
-    <h1>ChatGPT로 만든 로또번호 추첨기</h1>
-     <h3>v1.2</h3>
+    <h2>ChatGPT로 만든 로또번호 추첨기</h2>
+     <h3>v1.3</h3>
     <button onclick="generateNumbers()">Generate Numbers</button>
     <div id="container">
       <div id="result"></div>
