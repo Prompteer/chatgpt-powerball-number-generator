@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>ChatGPT가 만든 로또번호 추첨기</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+    <style>
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        text-align: center;
+      }
+      h1 {
+        margin-top: 50px;
+      }
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+      }
+      h1 {
+        margin-top: 50px;
+      }
+      button {
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #fecc01;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-top: 30px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #f5b900;
+      }
+      #result {
+        font-size: 24px;
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .ball {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #fecc01;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: ballEntrance 0.6s forwards;
+      }
+      .ball span {
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        font-size: 36px;
+      }
+
+      @keyframes ballEntrance {
+        0% {
+          transform: scale(0);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+       .slide-down {
+        animation: slide-down 0.5s ease-out forwards;
+      }
+      @keyframes slide-down {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(calc(100% + 10px));
+        }
+      }
+      .ball {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0; /* Make balls initially invisible */
+      }
+      .ball span {
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        font-size: 36px;
+      }
+      </style>
+  </head>
+  <body>
+    <h1>ChatGPT가 만든 로또번호 추첨기</h1>
+    <button onclick="generateNumbers()">Generate Numbers</button>
+    <div id="container">
+      <div id="result"></div>
+      <div id="history"></div>
+    </div>
+    <script>
+      // Function to generate 6 random numbers between 1 and 45
+      function generateNumbers() {
+        let numbers = [];
+        while (numbers.length < 6) {
+          let num = Math.floor(Math.random() * 45) + 1;
+          if (!numbers.includes(num)) {
+            numbers.push(num);
+          }
+        }
+        // Sort the numbers in ascending order
+        numbers.sort((a, b) => a - b);
+
+        let resultDiv = document.createElement("div");
+        resultDiv.style.display = "flex";
+        resultDiv.style.justifyContent = "center";
+        resultDiv.style.alignItems = "center";
+
+        let setColor = getRandomColor(); // Generate a single color for all balls in the set
+
+        for (let i = 0; i < numbers.length; i++) {
+          let ball = document.createElement("div");
+          ball.classList.add("ball");
+          ball.style.backgroundColor = setColor; // Use the same color for all balls
+          let span = document.createElement("span");
+          span.textContent = numbers[i];
+          ball.appendChild(span);
+          resultDiv.appendChild(ball);
+        }
+
+        let container = document.getElementById("container");
+        if (document.getElementById("result").hasChildNodes()) {
+          let historyDiv = document.getElementById("history");
+          let previousResult = document.getElementById("result").firstChild;
+          previousResult.classList.add("slide-down"); // Add the slide-down animation
+          historyDiv.insertBefore(previousResult, historyDiv.firstChild);
+
+          // Remove the creation animation for the existing number set
+          previousResult.querySelectorAll(".ball").forEach((ball, i) => {
+            ball.style.opacity = 1;
+            ball.style.animation = "none";
+          });
+
+          // Wait for the slide-down animation to finish before displaying the new number set
+          setTimeout(() => {
+            resultDiv.querySelectorAll(".ball").forEach((ball, i) => {
+              ball.style.opacity = 1;
+              ball.style.transition = "opacity 0.5s";
+              ball.style.transitionDelay = (i * 0.1) + "s";
+            });
+          }, 500);
+        } else {
+          resultDiv.querySelectorAll(".ball").forEach((ball, i) => {
+            ball.style.opacity = 1;
+            ball.style.transition = "opacity 0.5s";
+            ball.style.transitionDelay = (i * 0.1) + "s";
+          });
+        }
+
+        document.getElementById("result").innerHTML = "";
+        document.getElementById("result").appendChild(resultDiv);
+      }
+
+      // Function to generate a random color
+      function getRandomColor() {
+        let letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+    </script>
+  </body>
+</html>
