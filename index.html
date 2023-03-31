@@ -5,128 +5,82 @@
     <title>ChatGPT로 만든 로또번호 추첨기</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
-      <style>
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        text-align: center;
-      }
-      h1 {
-        margin-top: 50px;
-}
- #result {
-  flex-wrap: wrap;
-  max-width: 95%;
-  margin: 0 auto;
-  gap: 10px;
-}
+     <style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+  }
+  h1 {
+    margin-top: 50px;
+  }
+  button {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #fecc01;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 30px;
+    cursor: pointer;
+  }
 
-.ball {
-  min-width: 60px;
-  min-height: 60px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-
-.ball span {
-  font-size: 24px;
-}
-
-@media screen and (min-width: 480px) {
+  button:hover {
+    background-color: #f5b900;
+  }
+  #result {
+    font-size: 24px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+    padding: 0 10px;
+  }
   .ball {
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #fecc01;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    margin: 0 5px 10px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: ballEntrance 0.6s forwards;
   }
-
   .ball span {
-    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-size: 30px;
   }
-}
-button {
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #fecc01;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin-top: 30px;
-  cursor: pointer;
-}
 
-button:hover {
-  background-color: #f5b900;
-}
-#result {
-  font-size: 24px;
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  max-width: 100%;
-  padding: 0 10px;
-}
-.ball {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: #fecc01;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  margin: 0 5px 10px 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ballEntrance 0.6s forwards;
-}
-.ball span {
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  font-size: 36px;
-}
-
-      @keyframes ballEntrance {
-        0% {
-          transform: scale(0);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-       .slide-down {
-        animation: slide-down 0.5s ease-out forwards;
-      }
-      @keyframes slide-down {
-        0% {
-          transform: translateY(0);
-        }
-        100% {
-          transform: translateY(calc(100% + 10px));
-        }
-      }
-      .ball {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        margin-right: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0; /* Make balls initially invisible */
-      }
-      .ball span {
-        font-weight: bold;
-        color: #fff;
-        text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        font-size: 36px;
-      }
-      </style>
+  @keyframes ballEntrance {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .slide-down {
+    animation: slide-down 0.5s ease-out forwards;
+  }
+  @keyframes slide-down {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(calc(100% + 10px));
+    }
+  }
+</style>
   </head>
   <body>
     <h2>ChatGPT로 만든 로또번호 추첨기</h2>
-     <h3>v1.5</h3>
+     <h3>v1.6</h3>
     <button onclick="generateNumbers()">Generate Numbers</button>
     <div id="container">
       <div id="result"></div>
