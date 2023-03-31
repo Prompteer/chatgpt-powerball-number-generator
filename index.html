@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
      <style>
+             html, body {
+        touch-action: manipulation;
+      }
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
@@ -80,7 +83,7 @@
   </head>
   <body>
     <h2>ChatGPT로 만든 로또번호 추첨기</h2>
-     <h3>v1.7</h3>
+     <h3>v1.8</h3>
     <button onclick="generateNumbers()">Generate Numbers</button>
     <div id="container">
       <div id="result"></div>
