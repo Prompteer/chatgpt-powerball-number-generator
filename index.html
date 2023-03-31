@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>ChatGPT로 만든 로또번호 생성기</title>
+    <title>US Powerball number generator made with ChatGPT</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
      <style>
@@ -82,8 +82,8 @@
 </style>
   </head>
   <body>
-    <h2>ChatGPT로 만든 로또번호 생성기</h2>
-     <h3>v2.1</h3>
+    <h2>US Powerball number generator made with ChatGPT</h2>
+     <h3>v1.1</h3>
         <p>
       <a href="https://www.instagram.com/promp.teer/" target="_blank" rel="noopener noreferrer">Follow me on Instagram</a>
     </p>
@@ -92,78 +92,89 @@
       <div id="result"></div>
       <div id="history"></div>
     </div>
-    <script>
-      // Function to generate 6 random numbers between 1 and 45
-      function generateNumbers() {
-        let numbers = [];
-        while (numbers.length < 6) {
-          let num = Math.floor(Math.random() * 45) + 1;
-          if (!numbers.includes(num)) {
-            numbers.push(num);
-          }
-        }
-        // Sort the numbers in ascending order
-        numbers.sort((a, b) => a - b);
-
-        let resultDiv = document.createElement("div");
-        resultDiv.style.display = "flex";
-        resultDiv.style.justifyContent = "center";
-        resultDiv.style.alignItems = "center";
-
-        let setColor = getRandomColor(); // Generate a single color for all balls in the set
-
-        for (let i = 0; i < numbers.length; i++) {
-          let ball = document.createElement("div");
-          ball.classList.add("ball");
-          ball.style.backgroundColor = setColor; // Use the same color for all balls
-          let span = document.createElement("span");
-          span.textContent = numbers[i];
-          ball.appendChild(span);
-          resultDiv.appendChild(ball);
-        }
-
-        let container = document.getElementById("container");
-        if (document.getElementById("result").hasChildNodes()) {
-          let historyDiv = document.getElementById("history");
-          let previousResult = document.getElementById("result").firstChild;
-          previousResult.classList.add("slide-down"); // Add the slide-down animation
-          historyDiv.insertBefore(previousResult, historyDiv.firstChild);
-
-          // Remove the creation animation for the existing number set
-          previousResult.querySelectorAll(".ball").forEach((ball, i) => {
-            ball.style.opacity = 1;
-            ball.style.animation = "none";
-          });
-
-          // Wait for the slide-down animation to finish before displaying the new number set
-          setTimeout(() => {
-            resultDiv.querySelectorAll(".ball").forEach((ball, i) => {
-              ball.style.opacity = 1;
-              ball.style.transition = "opacity 0.5s";
-              ball.style.transitionDelay = (i * 0.1) + "s";
-            });
-          }, 500);
-        } else {
-          resultDiv.querySelectorAll(".ball").forEach((ball, i) => {
-            ball.style.opacity = 1;
-            ball.style.transition = "opacity 0.5s";
-            ball.style.transitionDelay = (i * 0.1) + "s";
-          });
-        }
-
-        document.getElementById("result").innerHTML = "";
-        document.getElementById("result").appendChild(resultDiv);
+<script>
+  // Function to generate 5 random numbers between 1 and 69, and 1 random number between 1 and 26 (for Powerball)
+  function generateNumbers() {
+    let numbers = [];
+    while (numbers.length < 5) {
+      let num = Math.floor(Math.random() * 69) + 1;
+      if (!numbers.includes(num)) {
+        numbers.push(num);
       }
+    }
+    // Sort the numbers in ascending order
+    numbers.sort((a, b) => a - b);
 
-      // Function to generate a random color
-      function getRandomColor() {
-        let letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-    </script>
+    let powerball = Math.floor(Math.random() * 26) + 1;
+
+    let resultDiv = document.createElement("div");
+    resultDiv.style.display = "flex";
+    resultDiv.style.justifyContent = "center";
+    resultDiv.style.alignItems = "center";
+
+    let setColor = getRandomColor(); // Generate a single color for all balls in the set
+
+    for (let i = 0; i < numbers.length; i++) {
+      let ball = document.createElement("div");
+      ball.classList.add("ball");
+      ball.style.backgroundColor = setColor; // Use the same color for all balls
+      let span = document.createElement("span");
+      span.textContent = numbers[i];
+      ball.appendChild(span);
+      resultDiv.appendChild(ball);
+    }
+
+    // Add the Powerball ball with a different color
+    let powerballBall = document.createElement("div");
+    powerballBall.classList.add("ball");
+    powerballBall.style.backgroundColor = "#ff6347"; // Use a different color for the Powerball ball
+    let powerballSpan = document.createElement("span");
+    powerballSpan.textContent = powerball;
+    powerballBall.appendChild(powerballSpan);
+    resultDiv.appendChild(powerballBall);
+
+    let container = document.getElementById("container");
+    if (document.getElementById("result").hasChildNodes()) {
+      let historyDiv = document.getElementById("history");
+      let previousResult = document.getElementById("result").firstChild;
+      previousResult.classList.add("slide-down"); // Add the slide-down animation
+      historyDiv.insertBefore(previousResult, historyDiv.firstChild);
+
+      // Remove the creation animation for the existing number set
+      previousResult.querySelectorAll(".ball").forEach((ball, i) => {
+        ball.style.opacity = 1;
+        ball.style.animation = "none";
+      });
+
+      // Wait for the slide-down animation to finish before displaying the new number set
+      setTimeout(() => {
+        resultDiv.querySelectorAll(".ball").forEach((ball, i) => {
+          ball.style.opacity = 1;
+          ball.style.transition = "opacity 0.5s";
+          ball.style.transitionDelay = (i * 0.1) + "s";
+        });
+      }, 500);
+    } else {
+      resultDiv.querySelectorAll(".ball").forEach((ball, i) => {
+        ball.style.opacity = 1;
+        ball.style.transition = "opacity 0.5s";
+        ball.style.transitionDelay = (i * 0.1) + "s";
+      });
+    }
+
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("result").appendChild(resultDiv);
+  }
+
+  // Function to generate a random color
+  function getRandomColor() {
+    let letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+</script>
   </body>
 </html>
