@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title>ChatGPT로 만든 로또번호 추첨기</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
-    <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+      <style>
       body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         text-align: center;
@@ -22,6 +23,12 @@ button {
   padding: 10px 20px;
   margin-top: 30px;
   cursor: pointer;
+}
+      @media (max-width: 768px) {
+  button {
+    font-size: 30px; /* Increase the font size for mobile devices */
+    padding: 20px 40px; /* Increase the padding for mobile devices */
+  }
 }
 button:hover {
   background-color: #f5b900;
